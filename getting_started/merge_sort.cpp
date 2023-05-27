@@ -43,7 +43,7 @@ void merge_helper(int A[], int p, int q, int r) {
   // smallest index of the two subarrays
   int i = 0; 
   int j = 0;
-  for (int k = p; k < r; ++k) {
+  for (int k = p; k <= r; ++k) {
     if (L[i] <= R[j]) {
       A[k] = L[i];
       ++i;
@@ -53,22 +53,47 @@ void merge_helper(int A[], int p, int q, int r) {
       ++j;
     }
   }
+
+  // Another solution that doesn't require the extra infinity value
+  /*
+  int k = p; 
+  while (i < l_size && j < r_size) {
+    if (L[i] <= R[j]) {
+      A[k] = L[i];
+      ++i;
+    } else {
+      A[k] = R[j];
+      ++j;
+    }
+    ++k;
+  }
+  while (i < l_size) {
+    A[k] = L[i];
+    ++i;
+    ++k;
+  }
+  while (j < r_size) {
+    A[k] = R[j];
+    ++j;
+    ++k;
+  }
+  */
 }
 
-void my_sorter(int A[], const int size, int p, int r) {
+void my_sorter(int A[], int p, int r) {
   if (p < r) {
     int q = (p + r) / 2;
-    my_sorter(A, size/2, p, q);
-    my_sorter(A, size - (size/2), q + 1, r);
+    my_sorter(A, p, q);
+    my_sorter(A, q + 1, r);
     merge_helper(A, p, q, r);
   }
 
 }
 
 int main() {
-  const int size = 18;
   // int A[size] = {5, 2, 4, 6, 1, 3};
-  int A[size] = {2, 4, 5, 1, 3, 6, 123, 5, 5, 234, 4, 57, 79, 23578 , 7,345, 4235, 567};
-  my_sorter(A, size, 0, size - 1);
+  int A[] = {2, 4, 5, 1, 3, 6, 123, 5, 5, 234, 4, 57, 79, 23578 ,7 ,345, 4235, 567};
+  const int size = sizeof(A) / sizeof(A[0]);
+  my_sorter(A, 0, size - 1);
   print_result(A, size);
 }
