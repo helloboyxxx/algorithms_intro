@@ -20,7 +20,7 @@ void print_result(const int A[], const int size) {
 }
 
 // void my_sorter(int A[], const int size, std::function<int(int, int)> func_ptr) {
-void my_sorter(int A[], const int size, bool (*func_ptr)(int, int)) {
+void my_sorter(int A[], const int size, int(*func_ptr)(int, int)) {
   for (int j = 1; j < size; ++j) {
     int key = A[j];
     
@@ -43,11 +43,11 @@ int main() {
   // non-decreasing insertion sort
   
   // my_sorter(A, size, std::less<int>());
-  my_sorter(A, size, [](int a, int b) { return a < b; });
+  my_sorter(A, size, +[](int a, int b) { return static_cast<int>(a < b); });
 
   // non-increading insertion sort
   // my_sorter(B, size, std::greater<int>());
-  my_sorter(B, size, [](int a, int b) { return a > b; });
+  my_sorter(B, size, +[](int a, int b) { return static_cast<int>(a > b); });
 
   print_result(A, size);
   print_result(B, size);
