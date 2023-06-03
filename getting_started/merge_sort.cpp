@@ -13,13 +13,7 @@
 #include <limits>
 #include <vector>
 
-
-void print_result(const std::vector<int>& A) {
-  for (size_t i = 0; i < A.size(); i++) {
-    std::cout << A[i] << " ";
-  }
-  std::cout << std::endl;
-}
+#include "sorters.hpp"
 
 
 
@@ -58,11 +52,11 @@ void merge_helper(std::vector<int>& A, const size_t p, const size_t q, const siz
   }
 }
 
-void my_sorter(std::vector<int>& A, const size_t p, const size_t r) {
+void ms_sorter(std::vector<int>& A, const size_t p, const size_t r) {
   if (p < r) {
     int q = (p + r) / 2;
-    my_sorter(A, p, q);
-    my_sorter(A, q + 1, r);
+    ms_sorter(A, p, q);
+    ms_sorter(A, q + 1, r);
     merge_helper(A, p, q, r);
   }
 
@@ -71,6 +65,6 @@ void my_sorter(std::vector<int>& A, const size_t p, const size_t r) {
 int main() {
   // std::vector<int> A = {4, 2, 5, 1, 3, 6};
   std::vector<int> A = {2, 4, 5, 1, 3, 6, 123, 5, 5, 234, 4, 57, 79, 23578 ,7 ,345, 4235, 567};
-  my_sorter(A, 0, A.size() - 1);
+  ms_sorter(A, 0, A.size() - 1);
   print_result(A);
 }

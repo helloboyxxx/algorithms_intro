@@ -11,17 +11,15 @@
 
 #include <iostream>
 #include <functional>
+#include <vector>
 
-void print_result(const int A[], const int size) {
-  for (int i = 0; i < size; i++) {
-    std::cout << A[i] << " ";
-  }
-  std::cout << std::endl;
-}
+#include "sorters.hpp"
 
-// void my_sorter(int A[], const int size, std::function<int(int, int)> func_ptr) {
-void my_sorter(int A[], const int size, int(*func_ptr)(int, int)) {
-  for (int j = 1; j < size; ++j) {
+
+
+// void my_sorter(int A[], std::function<int(int, int)> func_ptr) {
+void ins_sorter(std::vector<int>& A, int(*func_ptr)(int, int)) {
+  for (auto j = 1; j < A.size(); ++j) {
     int key = A[j];
     
     int i = j - 1;
@@ -34,23 +32,25 @@ void my_sorter(int A[], const int size, int(*func_ptr)(int, int)) {
 }
 
 int main() {
-  int A[6] = {5, 2, 4, 6, 1, 3};
-  int B[6] = {5, 2, 4, 6, 1, 3};
+  //int A[6] = {5, 2, 4, 6, 1, 3};
+  // int B[6] = {5, 2, 4, 6, 1, 3};
 
-  int size = sizeof(A)/sizeof(A[0]);
-  print_result(A, size);
+  std::vector<int> A = {5, 2, 4, 6, 1, 3};
+  std::vector<int> B = A; 
+
+  print_result(A);
 
   // non-decreasing insertion sort
   
   // my_sorter(A, size, std::less<int>());
-  my_sorter(A, size, +[](int a, int b) { return static_cast<int>(a < b); });
+  ins_sorter(A, +[](int a, int b) { return static_cast<int>(a < b); });
 
   // non-increading insertion sort
   // my_sorter(B, size, std::greater<int>());
-  my_sorter(B, size, +[](int a, int b) { return static_cast<int>(a > b); });
+  ins_sorter(B, +[](int a, int b) { return static_cast<int>(a > b); });
 
-  print_result(A, size);
-  print_result(B, size);
+  print_result(A);
+  print_result(B);
 
   return 0;
 }
