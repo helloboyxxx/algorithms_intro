@@ -13,8 +13,9 @@ inline void print_result(const std::vector<int>& A) {
   std::cout << std::endl;
 }
 
-// merge sort sorter
-void ms_sorter(std::vector<int>& A, const size_t p, const size_t r);
+// // merge sort sorter
+// template <typename T, typename A>
+// void ms_sorter(std::vector<T,A>& vec, const size_t p, const size_t r);
 
 // insertion sort
-void ins_sorter(int A[], const int size, int(*func_ptr)(int, int));
+// void ins_sorter(int A[], const int size, int(*func_ptr)(int, int));
